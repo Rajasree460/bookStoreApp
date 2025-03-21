@@ -1,18 +1,47 @@
-import React from 'react';
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 function Contact() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const onSubmit = (data) => {
-    console.log(data);
-    alert("Message sent successfully!");
+  const onSubmit = async (data) => {
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const response = await fetch("http://localhost:4001/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        setMessage("Message sent successfully!");
+        reset();  // Clear the form after successful submission
+      } else {
+        setMessage(result.error || "Something went wrong!");
+      }
+    } catch (error) {
+      setMessage("Failed to send message. Try again later.");
+      console.error("Error:", error);
+    }
+
+    setLoading(false);
   };
 
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="shadow-2xl p-7 rounded-md w-[600px]">
         <h3 className="font-bold text-lg">Contact Us</h3>
+        
+        {message && <p className="text-center text-green-600">{message}</p>}
+
         <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
           {/* Name */}
           <div>
@@ -57,8 +86,11 @@ function Contact() {
 
           {/* Button */}
           <div className="flex justify-center mt-6">
-            <button className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200">
-              Send Message
+            <button 
+              className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200"
+              disabled={loading}
+            >
+              {loading ? "Sending..." : "Send Message"}
             </button>
           </div>
         </form>
