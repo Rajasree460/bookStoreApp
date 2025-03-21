@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import path from "path";
+// import path from "path";
 
 import bookRoute from "./route/book.route.js";
 import userRoute from "./route/user.route.js";
