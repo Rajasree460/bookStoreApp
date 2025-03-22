@@ -8,7 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "nodemon index.js"
-   
   },
   "repository": {
     "type": "git",
@@ -26,10 +25,10 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.12.1",
-    "nodemon": "^3.1.9",
-    "cloudinary": "^1.21.0"
+    "cloudinary": "^1.21.0",
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "nodemon": "^3.1.9"
   }
 }
