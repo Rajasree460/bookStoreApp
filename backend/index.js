@@ -9,6 +9,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 // import path from "path";
 
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
+app.use(cors({ origin: FRONTEND_URL, credentials: true }));
+
 import bookRoute from "./route/book.route.js";
 import userRoute from "./route/user.route.js";
 import contactRoute from "./route/contact.route.js";
