@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-const FRONTEND_URL = process.env.FRONTEND_URL || "*";  // Allow all origins if FRONTEND_URL is undefined
+//const FRONTEND_URL = process.env.FRONTEND_URL || "*";  // Allow all origins if FRONTEND_URL is undefined
 app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 app.use(express.json()); // Parse incoming JSON data
 
