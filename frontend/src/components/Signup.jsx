@@ -24,7 +24,7 @@ function Signup() {
        document.getElementById("my_modal_3").close(); // Close modal after successful login
 
        await axios
-       .post("/user/signup", userInfo)
+       .post(`${import.meta.env.VITE_API_URL}/user/signup`, userInfo)
        .then((res) => {
         console.log(res.data);
         if (res.data) {

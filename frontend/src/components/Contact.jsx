@@ -11,7 +11,7 @@ function Contact() {
     setMessage("");
 
     try {
-      const response = await fetch("/contact", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
